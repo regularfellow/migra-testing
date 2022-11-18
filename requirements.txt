@@ -1,0 +1,2 @@
+migra
+psycopg2-binary

@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ..:/testing:cached
+    command: sleep infinity
+    network_mode: service:db
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
+  db:
+    image: postgres:14.4
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_HOSTNAME: localhost
+      POSTGRES_PORT: 5432
